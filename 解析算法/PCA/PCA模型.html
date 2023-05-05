@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>PCA - FusionChina计算引擎拆解</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+		
+		<!-- Katex support -->
+		<link rel="stylesheet" href="../../static/katex/katex.min.css">
+		
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../global.css">
+        <link rel="stylesheet" href="../../style.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../../InterestRate/InterestRate定义简介.html"><strong aria-hidden="true">1.</strong> Insterest Rate Definition</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../InterestRate/InterestRate定义简介.html"><strong aria-hidden="true">1.1.</strong> InterestRate定义简介</a></li><li class="chapter-item "><a href="../../InterestRate/InterestRate定义具体设置.html"><strong aria-hidden="true">1.2.</strong> InterestRate定义具体设置</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../InterestRate/RateDefinition可选设置项.html"><strong aria-hidden="true">1.2.1.</strong> Rate Definition可选设置项</a></li><li class="chapter-item "><a href="../../InterestRate/Advanced可选设置项.html"><strong aria-hidden="true">1.2.2.</strong> Advanced可选设置项</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../InterestRate/利率模型选择.html"><strong aria-hidden="true">1.2.2.1.</strong> 利率模型选择</a></li><li class="chapter-item "><a href="../../InterestRate/凸性调整.html"><strong aria-hidden="true">1.2.2.2.</strong> 凸性调整</a></li></ol></li></ol></li></ol></li><li class="chapter-item "><a href="../../YieldCurve/CurvesFamily模型说明.html"><strong aria-hidden="true">2.</strong> Yield Curve</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../YieldCurve/CurvesFamily模型说明.html"><strong aria-hidden="true">2.1.</strong> Curves Family</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../YieldCurve/CurvesFamily模型说明.html"><strong aria-hidden="true">2.1.1.</strong> 模型说明</a></li><li class="chapter-item "><a href="../../YieldCurve/CurvesFamily函数调用关系.html"><strong aria-hidden="true">2.1.2.</strong> 函数调用关系</a></li><li class="chapter-item "><a href="../../YieldCurve/GetCurveFamilyUIParams.html"><strong aria-hidden="true">2.1.3.</strong> 函数说明</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../YieldCurve/GetCurveFamilyUIParams.html"><strong aria-hidden="true">2.1.3.1.</strong> GetCurveFamilyUIParams</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../YieldCurve/YieldCurvesSummary.html"><strong aria-hidden="true">2.2.</strong> Yield Curves Summary</a></li><li class="chapter-item "><a href="../../YieldCurve/YieldCurves模型说明.html"><strong aria-hidden="true">2.3.</strong> Yield Curves</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../YieldCurve/YieldCurves模型说明.html"><strong aria-hidden="true">2.3.1.</strong> 模型说明</a></li><li class="chapter-item "><a href="../../YieldCurve/YieldCurves函数调用关系.html"><strong aria-hidden="true">2.3.2.</strong> 函数调用关系</a></li><li class="chapter-item "><a href="../../YieldCurve/GetYieldCurve.html"><strong aria-hidden="true">2.3.3.</strong> 函数说明</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../YieldCurve/GetYieldCurve.html"><strong aria-hidden="true">2.3.3.1.</strong> GetYieldCurve</a></li><li class="chapter-item "><a href="../../YieldCurve/ShortTemplate.html"><strong aria-hidden="true">2.3.3.2.</strong> ShortTemplate</a></li><li class="chapter-item "><a href="../../YieldCurve/LongTemplate.html"><strong aria-hidden="true">2.3.3.3.</strong> LongTemplate</a></li><li class="chapter-item "><a href="../../YieldCurve/FutureTemplate.html"><strong aria-hidden="true">2.3.3.4.</strong> FutureTemplate</a></li><li class="chapter-item "><a href="../../YieldCurve/SelectShortLongTemplate.html"><strong aria-hidden="true">2.3.3.5.</strong> SelectShortLongTemplate</a></li><li class="chapter-item "><a href="../../YieldCurve/SelectShortFutureLongTemplate.html"><strong aria-hidden="true">2.3.3.6.</strong> SelectShortFutureLongTemplate</a></li><li class="chapter-item "><a href="../../YieldCurve/YieldCurveTermRate.html"><strong aria-hidden="true">2.3.3.7.</strong> YieldCurveTermRate</a></li><li class="chapter-item "><a href="../../YieldCurve/ForwardRateTemplate.html"><strong aria-hidden="true">2.3.3.8.</strong> ForwardRateTemplate</a></li><li class="chapter-item "><a href="../../YieldCurve/MaturityForwardRateTemplate.html"><strong aria-hidden="true">2.3.3.9.</strong> MaturityForwardRateTemplate</a></li><li class="chapter-item "><a href="../../YieldCurve/RateForwardRateTemplate.html"><strong aria-hidden="true">2.3.3.10.</strong> RateForwardRateTemplate</a></li><li class="chapter-item "><a href="../../YieldCurve/ForwardTermRate.html"><strong aria-hidden="true">2.3.3.11.</strong> ForwardTermRate</a></li><li class="chapter-item "><a href="../../YieldCurve/InterpolationMethod.html"><strong aria-hidden="true">2.3.3.12.</strong> InterpolationMethod</a></li><li class="chapter-item "><a href="../../YieldCurve/SmoothYieldCurve.html"><strong aria-hidden="true">2.3.3.13.</strong> SmoothYieldCurve</a></li><li class="chapter-item "><a href="../../YieldCurve/InterpolationYieldCurveRate.html"><strong aria-hidden="true">2.3.3.14.</strong> InterpolationYieldCurveRate</a></li><li class="chapter-item "><a href="../../YieldCurve/InterpolationMethod.html"><strong aria-hidden="true">2.3.3.15.</strong> InterpolationMethod</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../YieldCurve/Standard.html"><strong aria-hidden="true">2.4.</strong> Yield Curve Model</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">2.4.1.</strong> Standard （暂无）</div></li><li class="chapter-item "><a href="../../YieldCurve/BondSpreadcurve.html"><strong aria-hidden="true">2.4.2.</strong> Bond Spread curve</a></li><li class="chapter-item "><a href="../../YieldCurve/NelsonSiegelNelsonSiegelSvensson.html"><strong aria-hidden="true">2.4.3.</strong> Nelson Siegel/Nelson Siegel Svensson</a></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.4.</strong> CMS Spread Curve（暂无）</div></li><li class="chapter-item "><a href="../../YieldCurve/CubicSplineGlobalCubicSpline.html"><strong aria-hidden="true">2.4.5.</strong> Cubic Spline/Global Cubic Spline</a></li><li class="chapter-item "><a href="../../YieldCurve/FlatForward.html"><strong aria-hidden="true">2.4.6.</strong> Flat Forward</a></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.7.</strong> Forex（暂无）</div></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.8.</strong> Forex Curve（暂无）</div></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.9.</strong> Forex Point Curve（暂无）</div></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.10.</strong> OIS discount（暂无）</div></li><li class="chapter-item "><a href="../../YieldCurve/rt_linear.html"><strong aria-hidden="true">2.4.11.</strong> rt_linear</a></li><li class="chapter-item "><a href="../../YieldCurve/SmithWilson.html"><strong aria-hidden="true">2.4.12.</strong> Smith Wilson</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../SABR/模型说明.html"><strong aria-hidden="true">3.</strong> SABR模型</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../SABR/模型说明.html"><strong aria-hidden="true">3.1.</strong> 模型说明</a></li><li class="chapter-item "><a href="../../SABR/函数调用关系.html"><strong aria-hidden="true">3.2.</strong> 函数调用关系</a></li><li class="chapter-item "><a href="../../SABR/GetUISABRModel.html"><strong aria-hidden="true">3.3.</strong> 函数说明</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../SABR/GetUISABRModel.html"><strong aria-hidden="true">3.3.1.</strong> GetUISABRModel</a></li><li class="chapter-item "><a href="../../SABR/CalParamEndResult.html"><strong aria-hidden="true">3.3.2.</strong> CalParamEndResult</a></li><li class="chapter-item "><a href="../../SABR/CalBestParamResult.html"><strong aria-hidden="true">3.3.3.</strong> CalBestParamResult</a></li><li class="chapter-item "><a href="../../SABR/FromUserInputResult.html"><strong aria-hidden="true">3.3.4.</strong> FromUserInputResult</a></li><li class="chapter-item "><a href="../../SABR/FromVolatilitySmile.html"><strong aria-hidden="true">3.3.5.</strong> FromVolatilitySmile</a></li><li class="chapter-item "><a href="../../SABR/CalibrateonlyAlpha.html"><strong aria-hidden="true">3.3.6.</strong> CalibrateonlyAlpha</a></li><li class="chapter-item "><a href="../../SABR/HaganModel.html"><strong aria-hidden="true">3.3.7.</strong> HaganModel</a></li><li class="chapter-item "><a href="../../SABR/BetterExpansion.html"><strong aria-hidden="true">3.3.8.</strong> Better expansion</a></li><li class="chapter-item "><a href="../../SABR/PDEModel.html"><strong aria-hidden="true">3.3.9.</strong> PDEModel</a></li><li class="chapter-item "><a href="../../SABR/MixOrder2PDEModel.html"><strong aria-hidden="true">3.3.10.</strong> MixOrder2PDEModel</a></li><li class="chapter-item "><a href="../../SABR/CalRelativeTime.html"><strong aria-hidden="true">3.3.11.</strong> CalRelativeTime</a></li><li class="chapter-item "><a href="../../SABR/BFGSSolver.html"><strong aria-hidden="true">3.3.12.</strong> BFGSSolver</a></li><li class="chapter-item "><a href="../../SABR/TargetModel.html"><strong aria-hidden="true">3.3.13.</strong> TargetModel</a></li><li class="chapter-item "><a href="../../SABR/CalVolatilityProcess.html"><strong aria-hidden="true">3.3.14.</strong> CalVolatilityProcess</a></li><li class="chapter-item "><a href="../../SABR/PricingSABRAfterParamInterpolation.html"><strong aria-hidden="true">3.3.15.</strong> PricingSABRAfterParamInterpolation</a></li><li class="chapter-item "><a href="../../SABR/SABRParameterInterplation.html"><strong aria-hidden="true">3.3.16.</strong> SABRParameterInterplation</a></li><li class="chapter-item "><a href="../../SABR/SABRVegaModel.html"><strong aria-hidden="true">3.3.17.</strong> SABRVegaModel</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../解析算法/模型说明.html"><strong aria-hidden="true">4.</strong> 解析算法</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../解析算法/PCA/PCA模型.html" class="active"><strong aria-hidden="true">4.1.</strong> PCA</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">FusionChina计算引擎拆解</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+					<main>
+                        <!-- Page table of contents -->
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+
+                        <h1 id="pca模型"><a class="header" href="#pca模型">PCA模型</a></h1>
+<h2 id="模型说明"><a class="header" href="#模型说明">模型说明</a></h2>
+<ul>
+<li>
+<p>模型概要</p>
+<p>​       主成分分析PCA模型本质上是一个线性变换，这个变换把数据变换到一个新的坐标系统中，使得任何数据投影的第一大方差在第一个坐标上，第二大方差在第二个坐标上，依次类推。具体应用在收益率曲线中，根据历史数据得到的一般结论是，第一主成分代表收益率曲线的水平移动（LEVEL），其在各个期限上的系数比较接近，近似等于所有利率的平均值，代表了利率曲线的平行移动。第二主成分代表收益率曲线的陡度移动（SLOP），有期限利差的含义，代表利率曲线斜率的变化。第三主成分代表收益率曲线的曲度移动（CURVE），描述了曲线的曲度，代表利率曲线的曲度变化。</p>
+</li>
+<li>
+<p>业务思维导图</p>
+</li>
+</ul>
+<img src="PCA流程.jpg" style="zoom: 100%;" />
+<ul>
+<li>
+<p>模型适用业务范围</p>
+<ul>
+<li>求收益利率曲线族水平移动、陡度移动和曲率移动这三个因子。</li>
+<li>得到综合性的收益率曲线族的一条或多条收益率曲线。</li>
+</ul>
+</li>
+</ul>
+<h2 id="函数说明"><a class="header" href="#函数说明">函数说明</a></h2>
+<h3 id="yieldcurvepca"><a class="header" href="#yieldcurvepca">YieldCurvePCA</a></h3>
+<h4 id="函数功能说明"><a class="header" href="#函数功能说明">函数功能说明</a></h4>
+<p>​		YieldCurvePCA函数提供了计算收益率曲线族主成分的功能，当UI界面PCA_Dimension=3时，实际得到的时收益率曲线族的水平移动、陡度移动和曲度移动这三个因子。</p>
+<h4 id="函数算法说明"><a class="header" href="#函数算法说明">函数算法说明</a></h4>
+<p>1.在一个收益率曲线族中，包含的远期利率数据矩阵表示为：
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span>
+​       <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>表示在第<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathnormal">i</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">h</span></span></span></span></span></span></span></span></span></span></span></span>条收益率曲线上terms为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0435em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">h</span></span></span></span></span></span></span></span></span></span></span></span>时的远期利率。因此，<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span></span></span></span>的每一行是一条收益率曲线，每一列是一系列terms相同的远期利率值。</p>
+<p>2.对数据矩阵进行处理，使其均值为0。</p>
+<p>3.计算得到协方差矩阵<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mclose">)</span></span></span></span>。</p>
+<p>4.然后计算特征值分解或奇异值分解，特征值或奇异值将降序排列。特征值分解为：
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8913em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span></span></span></span></span>
+​       其中<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>是正交矩阵，<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span>是对角矩阵。<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>的列是归一化特征向量<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>。即我们要求解的主成分。</p>
+<p>5.每个成分构成的重要性<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">ψ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>计算如下：
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">ψ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.5015em;vertical-align:-1.1301em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.3057em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4358em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.1301em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+​       其中<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>是对角矩阵<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">Λ</span></span></span></span>的对角元素。</p>
+<p>6.根据成分构成的重要性，我们可以挑选出前k个主成分，取<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span>的前k列组成矩阵<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span>。</p>
+<p>7.由于数据矩阵经过0均值处理，我们可以将得到的第一主成分数据加减一个常量使其能用于其它的业务模型（可选）</p>
+<h4 id="前端交互说明"><a class="header" href="#前端交互说明">前端交互说明 <a id="关联交互1" > </a></a></h4>
+<p><img src="pca%E5%89%8D%E7%AB%AF%E7%95%8C%E9%9D%A2.png" alt="" /></p>
+<p>Reference Libor：选取某种货币下的远期利率Libor曲线族。</p>
+<p>Principal Components: 选取主成分分析模型，默认为Standard Correlation PCA模型。</p>
+<p>PCA Dimension: 主成分分析中使用的维度数。</p>
+<p>Global Shift: 所有Libor利率的全局移动，即在Libor利率基础上加上Global_Shift。</p>
+<h4 id="参数表"><a class="header" href="#参数表">参数表</a></h4>
+<blockquote>
+<p>入参表：</p>
+</blockquote>
+<table><thead><tr><th>序号</th><th>入参</th><th>入参说明</th><th>类型</th><th>是否必须</th><th>数据来源</th></tr></thead><tbody>
+<tr><td>1</td><td>reference_libor</td><td>matrix</td><td>远期利率的Libor曲线族，即要求输入T个历史时间点M个期限下的收益率曲线数据</td><td>是</td><td>MarketData</td></tr>
+<tr><td>2</td><td>pca_dimension</td><td>int</td><td>主成分分析中使用的维度数</td><td>是</td><td>Input</td></tr>
+<tr><td>3</td><td>global_shift</td><td>float</td><td>所有Libor利率的全局移动，即在Libor利率基础上加上Global_Shift</td><td>是</td><td>Input</td></tr>
+</tbody></table>
+<blockquote>
+<p>出参表：</p>
+</blockquote>
+<table><thead><tr><th>序号</th><th>出参</th><th>出参说明</th><th>类型</th><th>备注</th></tr></thead><tbody>
+<tr><td>1</td><td>feature</td><td>降维后的主成分</td><td>matrix</td><td></td></tr>
+</tbody></table>
+<h4 id="函数隶属类型"><a class="header" href="#函数隶属类型">函数隶属类型</a></h4>
+<p>该函数隶属model，可应用于收益率曲线族的降维，一般用于获取收益率曲线的水平移动因子，陡度移动因子和曲度移动因子。</p>
+<h4 id="函数效果分析"><a class="header" href="#函数效果分析">函数效果分析</a></h4>
+<blockquote>
+<p>案例分析数据：</p>
+<p>reference_libor</p>
+<p>Date                   0.0              0.5             1.0          5.0            10.0
+2022-05-26  0.012500  0.017391  0.019246  0.024885  0.027100
+2022-05-27  0.012002  0.017321  0.019133  0.024767  0.026974
+2022-05-30  0.011928  0.017351  0.019141  0.025113  0.027225
+2022-05-31  0.012277  0.017333  0.019160  0.025464  0.027426
+2022-06-01  0.012002  0.017295  0.019415  0.025594  0.027551</p>
+<p>pca_dimension=3</p>
+<p>global_shift=1.5</p>
+<img src="pca_result.jpg" style="zoom:100%;" />
+</blockquote>
+<table><thead><tr><th>序号</th><th>函数名称</th><th>Fusion结果</th><th>开源结果</th><th>差值%</th><th>影响程度</th></tr></thead><tbody>
+<tr><td>1</td><td>YieldCurvePCA</td><td></td><td>PC1:[-0.09671292, -0.03332887,  0.18121228,  0.83349517,  0.55130559]<br />PC2:[-0.98669128, -0.08831063, -0.0862762 , -0.07087691, -0.07857749]<br />PC3:[ 0.06590256,  0.05298746, -0.97009136,  0.22606086, -0.02585397]</td><td></td><td>无/弱/严重</td></tr>
+</tbody></table>
+<h4 id="函数脚本代码"><a class="header" href="#函数脚本代码">函数脚本代码</a></h4>
+<blockquote>
+</blockquote>
+<pre><code class="language-python">import numpy as np
+
+def YieldCurvePCA(yield_data, k=3, global_shift=0):
+    X = yield_data.values
+    n_samples, n_features = X.shape
+    mean = np.array([np.mean(X[:, i]) for i in range(n_features)])
+    # normalization
+    norm_X = X - mean
+    # scatter matrix
+    scatter_matrix = np.dot(np.transpose(norm_X), norm_X)
+    # Calculate the eigenvectors and eigenvalues
+    eig_val, eig_vec = np.linalg.eig(scatter_matrix.astype(float))
+    eig_val = eig_val.real
+    eig_vec = eig_vec.real
+    eig_pairs = [(np.abs(eig_val[i]), eig_vec[:, i]) for i in range(n_features)]
+    eig_pairs = sorted(eig_pairs, key=lambda y: y[0], reverse=True)  # 水平移动、陡度移动和曲率移动
+    feature = []
+
+    ele = eig_pairs[0][1]
+    if (ele &gt; 0).sum() &lt; 0.5 * (len(ele)):
+        ele = -ele
+    ele += global_shift
+    feature.append(global_shift)
+
+    ele = eig_pairs[1][1]
+    if np.corrcoef(np.arange(len(ele)), ele)[0, 1] &lt; 0:
+        ele = -ele
+    feature.append(ele)
+
+    ele = eig_pairs[2][1]
+    if np.polyfit(np.arange(len(ele)), ele, deg=2)[0] &lt; 0:
+        ele = -ele
+    feature.append(ele)
+
+    feature = np.array(feature)
+    new_feature = []
+    for i in range(k):
+        if k &lt; 3:
+            new_feature.append(feature[i])
+        else:
+            new_feature.append(eig_pairs[i][1])
+    new_feature = pd.DataFrame(data=new_feature, columns=yield_data.columns)
+    return new_feature
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../解析算法/模型说明.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../解析算法/模型说明.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+            </nav>
+
+            <!--<div class="esa-toolbar">
+                <button class="esa-toolbar-gotop" data-tips="回到顶部" style="display: block;">
+                    <i class="fa fa-angle-up fa-3x" aria-hidden="true"></i>
+                </button>
+            </div>-->
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../../sidebar.js"></script>
+    </body>
+</html>

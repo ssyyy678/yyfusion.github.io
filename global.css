@@ -1,0 +1,29 @@
+body {
+    /* 全局字体大小 */
+	font-size: 1.5rem;
+}
+
+.content p {
+	/* 行间距 */
+	line-height: 2em;
+	/* 段间距 */
+	/* margin-top: 1.6em; */
+	/* margin-bottom: 1.6em; */
+	/* 首行缩进 1em表示缩进一个字 */
+	/* text-indent: 1em; */
+}
+
+li {
+	/* 行间距 */
+	line-height: 2em;
+	/* 段间距 */
+	/* margin-top: 1.6em; */
+	/* margin-bottom: 1.6em; */
+	/* 首行缩进 1em表示缩进一个字 */
+	/* text-indent: 1em; */
+}
+
+table {
+	/* 表格字体大小 */
+	font-size: 1.4rem;
+}

@@ -1,0 +1,356 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>利率模型选择 - FusionChina计算引擎拆解</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+		
+		<!-- Katex support -->
+		<link rel="stylesheet" href="../static/katex/katex.min.css">
+		
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../global.css">
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../InterestRate/InterestRate定义简介.html"><strong aria-hidden="true">1.</strong> Insterest Rate Definition</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../InterestRate/InterestRate定义简介.html"><strong aria-hidden="true">1.1.</strong> InterestRate定义简介</a></li><li class="chapter-item expanded "><a href="../InterestRate/InterestRate定义具体设置.html"><strong aria-hidden="true">1.2.</strong> InterestRate定义具体设置</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../InterestRate/RateDefinition可选设置项.html"><strong aria-hidden="true">1.2.1.</strong> Rate Definition可选设置项</a></li><li class="chapter-item expanded "><a href="../InterestRate/Advanced可选设置项.html"><strong aria-hidden="true">1.2.2.</strong> Advanced可选设置项</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../InterestRate/利率模型选择.html" class="active"><strong aria-hidden="true">1.2.2.1.</strong> 利率模型选择</a></li><li class="chapter-item "><a href="../InterestRate/凸性调整.html"><strong aria-hidden="true">1.2.2.2.</strong> 凸性调整</a></li></ol></li></ol></li></ol></li><li class="chapter-item "><a href="../YieldCurve/CurvesFamily模型说明.html"><strong aria-hidden="true">2.</strong> Yield Curve</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../YieldCurve/CurvesFamily模型说明.html"><strong aria-hidden="true">2.1.</strong> Curves Family</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../YieldCurve/CurvesFamily模型说明.html"><strong aria-hidden="true">2.1.1.</strong> 模型说明</a></li><li class="chapter-item "><a href="../YieldCurve/CurvesFamily函数调用关系.html"><strong aria-hidden="true">2.1.2.</strong> 函数调用关系</a></li><li class="chapter-item "><a href="../YieldCurve/GetCurveFamilyUIParams.html"><strong aria-hidden="true">2.1.3.</strong> 函数说明</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../YieldCurve/GetCurveFamilyUIParams.html"><strong aria-hidden="true">2.1.3.1.</strong> GetCurveFamilyUIParams</a></li></ol></li></ol></li><li class="chapter-item "><a href="../YieldCurve/YieldCurvesSummary.html"><strong aria-hidden="true">2.2.</strong> Yield Curves Summary</a></li><li class="chapter-item "><a href="../YieldCurve/YieldCurves模型说明.html"><strong aria-hidden="true">2.3.</strong> Yield Curves</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../YieldCurve/YieldCurves模型说明.html"><strong aria-hidden="true">2.3.1.</strong> 模型说明</a></li><li class="chapter-item "><a href="../YieldCurve/YieldCurves函数调用关系.html"><strong aria-hidden="true">2.3.2.</strong> 函数调用关系</a></li><li class="chapter-item "><a href="../YieldCurve/GetYieldCurve.html"><strong aria-hidden="true">2.3.3.</strong> 函数说明</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../YieldCurve/GetYieldCurve.html"><strong aria-hidden="true">2.3.3.1.</strong> GetYieldCurve</a></li><li class="chapter-item "><a href="../YieldCurve/ShortTemplate.html"><strong aria-hidden="true">2.3.3.2.</strong> ShortTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/LongTemplate.html"><strong aria-hidden="true">2.3.3.3.</strong> LongTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/FutureTemplate.html"><strong aria-hidden="true">2.3.3.4.</strong> FutureTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/SelectShortLongTemplate.html"><strong aria-hidden="true">2.3.3.5.</strong> SelectShortLongTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/SelectShortFutureLongTemplate.html"><strong aria-hidden="true">2.3.3.6.</strong> SelectShortFutureLongTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/YieldCurveTermRate.html"><strong aria-hidden="true">2.3.3.7.</strong> YieldCurveTermRate</a></li><li class="chapter-item "><a href="../YieldCurve/ForwardRateTemplate.html"><strong aria-hidden="true">2.3.3.8.</strong> ForwardRateTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/MaturityForwardRateTemplate.html"><strong aria-hidden="true">2.3.3.9.</strong> MaturityForwardRateTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/RateForwardRateTemplate.html"><strong aria-hidden="true">2.3.3.10.</strong> RateForwardRateTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/ForwardTermRate.html"><strong aria-hidden="true">2.3.3.11.</strong> ForwardTermRate</a></li><li class="chapter-item "><a href="../YieldCurve/InterpolationMethod.html"><strong aria-hidden="true">2.3.3.12.</strong> InterpolationMethod</a></li><li class="chapter-item "><a href="../YieldCurve/SmoothYieldCurve.html"><strong aria-hidden="true">2.3.3.13.</strong> SmoothYieldCurve</a></li><li class="chapter-item "><a href="../YieldCurve/InterpolationYieldCurveRate.html"><strong aria-hidden="true">2.3.3.14.</strong> InterpolationYieldCurveRate</a></li><li class="chapter-item "><a href="../YieldCurve/InterpolationMethod.html"><strong aria-hidden="true">2.3.3.15.</strong> InterpolationMethod</a></li></ol></li></ol></li><li class="chapter-item "><a href="../YieldCurve/Standard.html"><strong aria-hidden="true">2.4.</strong> Yield Curve Model</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">2.4.1.</strong> Standard （暂无）</div></li><li class="chapter-item "><a href="../YieldCurve/BondSpreadcurve.html"><strong aria-hidden="true">2.4.2.</strong> Bond Spread curve</a></li><li class="chapter-item "><a href="../YieldCurve/NelsonSiegelNelsonSiegelSvensson.html"><strong aria-hidden="true">2.4.3.</strong> Nelson Siegel/Nelson Siegel Svensson</a></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.4.</strong> CMS Spread Curve（暂无）</div></li><li class="chapter-item "><a href="../YieldCurve/CubicSplineGlobalCubicSpline.html"><strong aria-hidden="true">2.4.5.</strong> Cubic Spline/Global Cubic Spline</a></li><li class="chapter-item "><a href="../YieldCurve/FlatForward.html"><strong aria-hidden="true">2.4.6.</strong> Flat Forward</a></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.7.</strong> Forex（暂无）</div></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.8.</strong> Forex Curve（暂无）</div></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.9.</strong> Forex Point Curve（暂无）</div></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.10.</strong> OIS discount（暂无）</div></li><li class="chapter-item "><a href="../YieldCurve/rt_linear.html"><strong aria-hidden="true">2.4.11.</strong> rt_linear</a></li><li class="chapter-item "><a href="../YieldCurve/SmithWilson.html"><strong aria-hidden="true">2.4.12.</strong> Smith Wilson</a></li></ol></li></ol></li><li class="chapter-item "><a href="../SABR/模型说明.html"><strong aria-hidden="true">3.</strong> SABR模型</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../SABR/模型说明.html"><strong aria-hidden="true">3.1.</strong> 模型说明</a></li><li class="chapter-item "><a href="../SABR/函数调用关系.html"><strong aria-hidden="true">3.2.</strong> 函数调用关系</a></li><li class="chapter-item "><a href="../SABR/GetUISABRModel.html"><strong aria-hidden="true">3.3.</strong> 函数说明</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../SABR/GetUISABRModel.html"><strong aria-hidden="true">3.3.1.</strong> GetUISABRModel</a></li><li class="chapter-item "><a href="../SABR/CalParamEndResult.html"><strong aria-hidden="true">3.3.2.</strong> CalParamEndResult</a></li><li class="chapter-item "><a href="../SABR/CalBestParamResult.html"><strong aria-hidden="true">3.3.3.</strong> CalBestParamResult</a></li><li class="chapter-item "><a href="../SABR/FromUserInputResult.html"><strong aria-hidden="true">3.3.4.</strong> FromUserInputResult</a></li><li class="chapter-item "><a href="../SABR/FromVolatilitySmile.html"><strong aria-hidden="true">3.3.5.</strong> FromVolatilitySmile</a></li><li class="chapter-item "><a href="../SABR/CalibrateonlyAlpha.html"><strong aria-hidden="true">3.3.6.</strong> CalibrateonlyAlpha</a></li><li class="chapter-item "><a href="../SABR/HaganModel.html"><strong aria-hidden="true">3.3.7.</strong> HaganModel</a></li><li class="chapter-item "><a href="../SABR/BetterExpansion.html"><strong aria-hidden="true">3.3.8.</strong> Better expansion</a></li><li class="chapter-item "><a href="../SABR/PDEModel.html"><strong aria-hidden="true">3.3.9.</strong> PDEModel</a></li><li class="chapter-item "><a href="../SABR/MixOrder2PDEModel.html"><strong aria-hidden="true">3.3.10.</strong> MixOrder2PDEModel</a></li><li class="chapter-item "><a href="../SABR/CalRelativeTime.html"><strong aria-hidden="true">3.3.11.</strong> CalRelativeTime</a></li><li class="chapter-item "><a href="../SABR/BFGSSolver.html"><strong aria-hidden="true">3.3.12.</strong> BFGSSolver</a></li><li class="chapter-item "><a href="../SABR/TargetModel.html"><strong aria-hidden="true">3.3.13.</strong> TargetModel</a></li><li class="chapter-item "><a href="../SABR/CalVolatilityProcess.html"><strong aria-hidden="true">3.3.14.</strong> CalVolatilityProcess</a></li><li class="chapter-item "><a href="../SABR/PricingSABRAfterParamInterpolation.html"><strong aria-hidden="true">3.3.15.</strong> PricingSABRAfterParamInterpolation</a></li><li class="chapter-item "><a href="../SABR/SABRParameterInterplation.html"><strong aria-hidden="true">3.3.16.</strong> SABRParameterInterplation</a></li><li class="chapter-item "><a href="../SABR/SABRVegaModel.html"><strong aria-hidden="true">3.3.17.</strong> SABRVegaModel</a></li></ol></li></ol></li><li class="chapter-item "><a href="../解析算法/模型说明.html"><strong aria-hidden="true">4.</strong> 解析算法</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../解析算法/PCA/PCA模型.html"><strong aria-hidden="true">4.1.</strong> PCA</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">FusionChina计算引擎拆解</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+					<main>
+                        <!-- Page table of contents -->
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+
+                        <h1 id="利率模型选择interest-rate-models"><a class="header" href="#利率模型选择interest-rate-models">利率模型选择（Interest Rate Models）</a></h1>
+<p>Model选择是interest rate定义的核心，因而本节对Model选项中可选择的利率模型进行介绍。这里只介绍每个模型的特定参数，其他一些共有的必需参数在本节的示例中按如下定义：</p>
+<p>——利率的固定日期按PARIS - EUR日历确定</p>
+<p>——利率在息票开始日期的两天前固定，由Settlement Lag确定</p>
+<p>——利率金额四舍五入到小数点后四位</p>
+<p>——利率的工作日按PARIS日历确定</p>
+<h2 id="标准模型standard"><a class="header" href="#标准模型standard">标准模型(Standard)</a></h2>
+<p>标准利率模型是用来定义标准利率的。该利率可用于任何以利率为标的资产的金融工具。</p>
+<p>标准利率模型的特定参数包括：</p>
+<p>——Term：利率的期限，可以定义为任何长度的时间。</p>
+<p>——Curve Family : 定义用于对利率定价的曲线系。</p>
+<p>——Model：利率模型必须设置为Standard。</p>
+<p>——Rate Type：定义利率的类型，用于短期利率时，设置为Monetary；用于长期利率时，设置为Swap。</p>
+<p>以下为一个标准利率设置样例。如图所示，这是一个利率期限为三个月的短期利率。</p>
+<img src="../static/typora-user-images/standard.png" alt="standard" style="zoom:67%;" />
+<h2 id="基差互换利率basis-swap-rate"><a class="header" href="#基差互换利率basis-swap-rate">基差互换利率（Basis Swap Rate）</a></h2>
+<p>基差互换利率模型用于定义基差互换利率。基础互换利率是用来建立基差互换曲线的长期利率模板。</p>
+<p>基差互换曲线用于为下列息票定价：</p>
+<p>——两种不同货币利率之间的基差互换</p>
+<p>——同种货币不同区间(tenor)的两种利率的互换</p>
+<p>——同种货币不同利差(spread)的两种利率的互换</p>
+<p>基差互换利率用于以下情形的定义：</p>
+<p>——基差互换曲线的长期期限</p>
+<p>——基差互换得曲线系中的默认利率</p>
+<p>以下为一个基差互换利率设置样例。如图所示，这是一个利率期限为一年的基差互换利率；利率类型为Swap，这将利率定义为一个长期利率；EUR_long作为基差和利率互换的标的资产。</p>
+<img src="../static/typora-user-images/basis swap rate.png" alt="basis swap rate" style="zoom:67%;" />
+<p>基差互换利率模型的特定参数包括：</p>
+<p>——Term：利率的期限，必须定义为一年或以上。</p>
+<p>——Curve Family : 定义基差曲线的曲线系。</p>
+<p>——Model：利率模型必须设置为Basis Swap Rate。</p>
+<p>——Rate Type：定义利率的类型，必须设置为Swap。</p>
+<p>——Index：定义作为基差或利率互换的标的资产的利率</p>
+<h2 id="固定期限互换利差利率cms-spread-rate"><a class="header" href="#固定期限互换利差利率cms-spread-rate">固定期限互换利差利率（CMS Spread Rate）</a></h2>
+<h3 id="固定期限互换利率constant-maturity-swap-rate"><a class="header" href="#固定期限互换利率constant-maturity-swap-rate">固定期限互换利率（Constant Maturity Swap Rate）</a></h3>
+<p>固定期限互换(CMS)是被设置为按利率互换定价的利率。这使用户可以按照进入一个利率互换的合同利率创建期货。</p>
+<p>CMS的浮动端定义为一个标的利率，固定端取自利率曲线的一个点。利率曲线的点由CMS的期限决定。例如，如果CMS利率的期限设置为一年，利率曲线上到期日为一年的利率将用作互换的固定利率。</p>
+<p>以下为一个CMS利率设置样例。如图所示，这个IMM CMS利率的利率期限为一年，与EUR_S的期限相同；利率类型为Swap，这将利率定义为一个长期利率；Index下拉列表选择的EUR_short利率为CMS利率的浮动端。</p>
+<img src="../static/typora-user-images/CMS Rate.png" alt="CMS rate" style="zoom:67%;" />
+<p>固定期限互换利率的特定参数包括：</p>
+<p>——Term：利率的期限，必须定义为一年或以上。<strong>注</strong>：此项必须设置为标的利率的期限</p>
+<p>——Model：利率模型必须设置为Standard。</p>
+<p>——Rate Type：定义利率的类型，必须设置为Swap。</p>
+<p>——Index：定义用于互换的浮动利率，必须是一个Rate Type为monetary的短期利率。</p>
+<p>——Frequency：定义互换的频率。<strong>注</strong>：此项必须设置为标的利率的频率</p>
+<p>——Settlement Lag：定义互换的开始日期。互换开始日期由Term加Settlement Lag确定利率曲线上的点。</p>
+<h3 id="cms利差利率cms-spread-rate"><a class="header" href="#cms利差利率cms-spread-rate">CMS利差利率(CMS Spread Rate)</a></h3>
+<p>固定期限互换（CMS）利差利率曲线是其长期利率定义为基于另一个利率的利差的曲线。长期利率使用CMS Spread Rate模型定义。</p>
+<p>以下为一个CMS利差利率设置样例。这是一个用于CMS利率曲线的长期利率，其特征包括：利率期限为一年；利率类型为Swap，这将利率定义为一个长期利率；Index下拉列表选择的EUR_short利率为CMS利差曲线的短期利率。</p>
+<img src="../static/typora-user-images/CMS Spread Rate.png" alt="CMS Spread Rate" style="zoom:67%;" />
+<p>CMS利差利率的特定参数包括：</p>
+<p>——Term：利率的期限，必须定义为一年或以上。</p>
+<p>——Model：利率模型必须设置为CMS Spread Rate。</p>
+<p>——Rate Type：定义利率的类型，必须设置为Swap。</p>
+<p>——Index：定义用于短期利率的利率。</p>
+<h2 id="国际货币市场cms利率imm-cms-rate"><a class="header" href="#国际货币市场cms利率imm-cms-rate">国际货币市场CMS利率(IMM CMS Rate)</a></h2>
+<p>IMM CMS利率是为国际货币市场(IMM)日期定义的固定期限互换(CMS)利率。IMM日期是3月，6月，9月和12月的第三个星期三。这些日期用于计算互换现金流。</p>
+<p>以下为一个IMM CMS利率设置样例。如图所示，这个IMM CMS利率的利率期限为两年；Index下拉列表选择的CMS Swap rate利率是国际货币市场的基准利率，也是CMS的浮动端；支付频率为quarterly，这与基准利率的期限相同；利率类型为Swap，这将利率定义为一个长期利率；利率模型为IMM CMS。</p>
+<img src="../static/typora-user-images/IMM CMS.png" alt="IMM CMS" style="zoom:67%;" />
+<p>下图展示了为上例IMMCMSSwapRate定义的基准利率样例。该利率为一个期限为三个月的短期利率，该期限等于IMMCMSSwapRate的支付频率(frequency)。</p>
+<img src="../static/typora-user-images/IMMCMSIndex.png" alt="image-20220613150638626" style="zoom:67%;" />
+<p>IMM CMS利率的特定参数包括：</p>
+<p>——Term：利率的期限，必须定义为一年或以上。</p>
+<p>——Model：利率模型必须设置为IMM CMS。</p>
+<p>——Rate Type：定义利率的类型。必须设置为Swap。</p>
+<p>——Index：定义用于互换的浮动利率，必须是一个Rate Type为monetary的短期利率。利率的期限必须是三个月或六个月，因为IMM现金流是每季度产生的。</p>
+<p>——Frequency：定义互换的频率，必须设置为quarterly或semi-annually，要与利率Index的期限匹配。<strong>注</strong>：美国市场下定义的IMM CMS利率Frequency必须为quarterly；欧洲市场下定义的IMM CMS利率Frequency必须为semi-annual。</p>
+<p>——Settlement Lag：定义互换的开始日期。互换开始日期由Term加Settlement Lag确定利率曲线上的点。</p>
+<h2 id="浮动通货膨胀互换利率floatinginflation-swap-rate"><a class="header" href="#浮动通货膨胀互换利率floatinginflation-swap-rate">浮动/通货膨胀互换利率(Floating/Inflation Swap Rate)</a></h2>
+<p>浮动/通货膨胀互换利率模型定义了用于校准通货膨胀互换中使用的通货膨胀率的利率。该模型是使用浮动vs通货膨胀互换的利率和通货膨胀率定义的。</p>
+<p>浮动vs通货膨胀互换利率的特定参数包括：</p>
+<p>——Model：利率模型必须设置为Floating/Inflation Swap Rate。</p>
+<p>——Rate Type：定义利率的类型，自动设置为Inflation ZC Rate。</p>
+<p>——Index：定义浮动vs通货膨胀互换的浮动利率。</p>
+<p>——Inflation index：定义浮动vs通货膨胀互换的通货膨胀率。</p>
+<p>——Inflation rule：定义通货膨胀率使用的通货膨胀规则。</p>
+<p>以下为一个浮动vs通货膨胀互换利率设置样例。如图所示，这是一个期限为一年的浮动vs通货膨胀互换利率；利率日历规则为Open/252；复利计算模式为Actuarial；支付频率设置为final。</p>
+<img src="../static/typora-user-images/Floating vs Inflation Swap Rate.png" alt="Floating vs Inflation Swap Rate" style="zoom:67%;" />
+<h2 id="外汇基点利率forex-point-rate"><a class="header" href="#外汇基点利率forex-point-rate">外汇基点利率(Forex Point Rate)</a></h2>
+<p>Forex Point Rate模型定义用于外汇曲线的利率。外汇曲线使用本币收益率曲线定义外币的零息利率。外汇远期工具使用这些利率来计算远期价格。</p>
+<p>外汇基点利率的特定参数包括：</p>
+<p>——Model：利率模型必须设置为Forex Point Rate。</p>
+<p>——Rate Type：定义利率的类型，必须设置为Monetary。</p>
+<p>以下为一个Forex Point Rate设置样例。如图所示，这是一个期限为一个月的外汇基点利率；利率类型为Monetary，这将利率定义为一个短期利率。</p>
+<img src="../static/typora-user-images/Forex Point Rate.png" alt="Forex Point Rate" style="zoom:67%;" />
+<h2 id="指数挂钩利率index-linked-rate"><a class="header" href="#指数挂钩利率index-linked-rate">指数挂钩利率(Index-Linked Rate)</a></h2>
+<p>Index-Linked模型定义了智利利率互换使用的利率。该利率由每天发布的指数决定，可以使用实时反馈进行更新。</p>
+<p>指数挂钩利率的特定参数包括：</p>
+<p>——Model：利率模型必须设置为Index-Linked。</p>
+<p>——Rate Type：定义利率的类型，自动设置为Monetary，且该设置不可更改。</p>
+<p>以下为一个指数挂钩利率设置样例。如图所示，这是一个期限为一个月的指数挂钩利率；利率类型为Monetary，此项是Model下拉项选择Index-Linked的情况下自动设置的；settlement lag设置为两天。</p>
+<img src="../static/typora-user-images/Index-linked Rate.png" alt="Index-linked Rate" style="zoom:67%;" />
+<h2 id="插值利率模型interpolated-rate-model"><a class="header" href="#插值利率模型interpolated-rate-model">插值利率模型(Interpolated Rate Model)</a></h2>
+<p>Interpolated Rate模型将利率定义为插值利率。插值利率是在一系列其他利率的到期日列表中插值获得的利率。如果息票期在此列表中的到期日之间，则利率将通过到期日在息票前的利率和期日在息票后的利率插值获得。插值中使用的利率根据到期日与票息期的接近程度为权重进行加权。</p>
+<p>利率的插值方法如下：</p>
+<p>不完整区间：利率使用息票开始日期前后的到期日定义的加权利率进行线性插值。例如，如果到期日列表定义了到期日为三个月和九个月的利率，而不完整区间为六个月零一周，则利率将从三个月和九个月的利率中插值。九个月利率的权重比三个月利率的权重更高，因为不完整区间更接近九个月。</p>
+<p>完整区间：到期日列表中最接近的到期日的利率用作完整区间的利率。</p>
+<p>插值利率可用于一下金融工具：</p>
+<p>带浮动端的利率互换(Swaps with floating legs)
+浮动利率债券(Floating bonds)
+利率顶和底(Caps-and-floors)
+债务工具(Debt instruments)</p>
+<p>插值利率的特定参数包括：</p>
+<p>——Model：利率模型必须设置为Interpolated Rate。这将启用Open model specific data按钮。单击此按钮将显示Rate List对话框，该对话框定义插值利率的到期日。</p>
+<p>——Rate Type：定义利率的类型，必须设置为Swap。</p>
+<p>以下为一个插值利率设置样例。如图所示，这是一个期限为一年的插值利率；利率类型为Swap，这将利率定义为一个长期利率。</p>
+<img src="../static/typora-user-images/Interpolated Rate.png" alt="Interpolated Rate" style="zoom:67%;" />
+<h3 id="定义到期日列表"><a class="header" href="#定义到期日列表">定义到期日列表</a></h3>
+<p>按以下步骤要定义插值利率的到期日列表：</p>
+<p>1.点击利率窗口的Openmodel specific data按钮，弹出Ratelist窗口。</p>
+<img src="../static/typora-user-images/Ratelist.png" alt="Ratelist" style="zoom:50%;" />
+<p>2.在Rate Code列中，输入按用户所需到期日定义的利率参考代码。所选利率的期限显示在Relative Maturity列中。<strong>注</strong>：不能在Ratelist中指定内插利率。</p>
+<p>3.点击OK按钮</p>
+<p>插值利率样例：</p>
+<p>不完整的现金流显示在金融工具窗口的端选项卡中。
+下图为“利率互换”窗口的“支付端现金流”选项卡：</p>
+<img src="../static/typora-user-images/Paid Leg Cash Flow Tab.png" alt="Paid Leg Cash Flow Tab" style="zoom:67%;" />
+<p>第一期现金流是不完整区间，在这个现金流的Broken Flow列显示Yes。此现金流的插值利率显示在Full Explanation选项卡上。此选项卡显示不完整区间的详细信息：</p>
+<p>——Days：不完整区间包含的天数</p>
+<p>——Rate：插值利率</p>
+<p>——Fixing Weight 1：到期日在不完整区间之前的利率的权重，用于插值利率。此列和Fixing Weight 2列的加和为 100。如果修改此权重，则Fixing Weight 2的权重将随之修改。</p>
+<p>——Fixing Weight 2：到期日在不完整区间之后的利率的权重，用于插值利率。此列和Fixing Weight 1列的加和为 100。如果修改此权重，则Fixing Weight 1的权重将随之修改。</p>
+<p>**注：**用户可以编辑除债务工具外所有使用插值利率的金融工具的fixing rates。此外，权重仅用于与带浮动端的利率互换和浮动利率债券。</p>
+<h2 id="反向浮动利率模型inverse-floater"><a class="header" href="#反向浮动利率模型inverse-floater">反向浮动利率模型(Inverse Floater)</a></h2>
+<p>反向浮动利率模型用于定义了反向浮动利率。反向浮动利率是指与收益率曲线上的的短期基准利率反向变动的利率。如果基准利率上升，反向浮动利率就会下降。如果基准利率下降，反向浮动利率上升。这个模型可以用于任何以利率为标的资产的金融工具。</p>
+<p>反向浮动利率是用一个固定金额与利率的差值来确定的。这个金额以百分比为单位定义作为利差(spread)金额。反向浮动利率计算为利差金额减去基准利率乘杠杆比率。例如，如果利差金额为7%，基准利率为5%，杠杆比率为50%，则反向浮动利率计算为4.5%。</p>
+<p>以下为一个反向浮动利率设置样例。如图所示，这是一个期限为三个月的反向浮动利率；利率类型为Monetary，这将利率定义为一个短期利率；利差金额为6%，杠杆比率为50%。</p>
+<img src="../static/typora-user-images/Inverse Floater Rate.png" alt="Inverse Floater Rate" style="zoom:67%;" />
+<p>反向浮动利率的特定参数包括：</p>
+<p>——Spread(%)：定义利差金额。反向浮动利率的计算方法是用这个金额减去基准利率。必须以百分比为单位定义。</p>
+<p>——Curve Family：定义基准利率的收益率曲线的曲线系。</p>
+<p>——Leverage：定义用于计算反向浮动利率的基准利率的百分比。例如，基准利率为4%，杠杆比率为50%，则用于计算的基准利率为2%。</p>
+<h2 id="伦敦银行间同业拆借利率libor"><a class="header" href="#伦敦银行间同业拆借利率libor">伦敦银行间同业拆借利率(Libor)</a></h2>
+<p>Libor模型是用来定义伦敦银行间同业拆借利率的利率模型。可以使用这个模型来定义利率互换和其他利率（如CMS利差利率和反向浮动利率）中使用的基准利率。</p>
+<p>该模型的参数与Standard模型类似，唯一的区别是，所有的利率固定都使用由GBP货币定义的日历。</p>
+<p>Libor利率的特定参数包括：</p>
+<p>——Model：利率模型必须设置为Libor。</p>
+<p>——Rate Type：定义利率的类型，必须设置为Swap。</p>
+<p>以下为一个Libor利率设置样例。如图所示，这是一个期限为一年的Libor利率；利率类型为Swap，这将利率定义为一个长期利率。</p>
+<img src="../static/typora-user-images/Libor Rate.png" alt="Libor Rate" style="zoom:67%;" />
+<h2 id="伦敦插值利率模型london-interpolated-rate"><a class="header" href="#伦敦插值利率模型london-interpolated-rate">伦敦插值利率模型(London Interpolated Rate)</a></h2>
+<p>London Interpolated Rate模型与Interpolated Rate模型是类似的。它使用一系列定义好的到期日列表来获得不完整现金流的插值利率。London Interpolated Rate模型和Interpolated Rate模型之间的唯一区别是，London Interpolated Rate模型使用由GBP货币定义的日历。</p>
+<p>以下为一个Libor Interpolated Rate设置样例。如图所示，这是一个期限为一年的伦敦插值利率；利率类型为Swap，这将利率定义为一个长期利率。</p>
+<img src="../static/typora-user-images/Libor Interpolated Rate.png" alt="Libor Interpolated Rate" style="zoom:67%;" />
+<p>London Interpolated Rate利率的特定参数包括：</p>
+<p>——Model：利率模型必须设置为Interpolated Rate。这将启用Open model specific data按钮。单击此按钮将显示Rate List对话框，该对话框定义插值利率的到期日。</p>
+<p>——Rate Type：定义利率的类型，必须设置为Swap。</p>
+<h2 id="墨西哥互换利率mexican-swap-rate"><a class="header" href="#墨西哥互换利率mexican-swap-rate">墨西哥互换利率(Mexican Swap Rate)</a></h2>
+<p>墨西哥利率互换的到期日定义为28天的倍数。Mexican Swap Rate模型被用来定义与这些到期日相对应的期限的利率。</p>
+<p>Mexican Swap Rate利率的特定参数包括：</p>
+<p>——Model：利率模型必须设置为Mexican Swap Rate。</p>
+<p>——Rate Type：定义利率的类型，必须设置为Swap。</p>
+<p>——Index：定义基准利率，必须设置为一个期限为28天的短期利率。</p>
+<p>——Frequency：定义利率的支付频率，必须设置为4Weeks。</p>
+<p>以下为一个Mexican Swap Rate设置样例。如图所示，这是一个期限为一年的墨西哥互换利率；利率类型为Swap，这将利率定义为一个长期利率。</p>
+<img src="../static/typora-user-images/Mexican Swap Rate.png" alt="Mexican Swap Rate" style="zoom:67%;" />
+<h2 id="隔夜指数掉期利差率ois-spread-rate"><a class="header" href="#隔夜指数掉期利差率ois-spread-rate">隔夜指数掉期利差率（OIS Spread Rate）</a></h2>
+<p>OIS Spread Rate定义为隔夜利率与固定期限伦敦银行同业拆借利率之间的利差。其一端为交易日确定的伦敦银行同业拆借利率，另一端根据每日隔夜利率计算。这个利率是基于一个基准利率(index)定义的，例如Libor欧洲美元利率或联邦基金利率等。该模型中参数包含:</p>
+<p>——Term：利率的期限，必须定义为一年或以上。</p>
+<p>——Model：利率模型必须设置为OIS Spread Rate。</p>
+<p>——Rate Type：定义利率的类型。必须设置为Swap。</p>
+<p>——Index：定义用于互换的浮动利率。</p>
+<h2 id="互换利率模板template-swap-rate"><a class="header" href="#互换利率模板template-swap-rate">互换利率模板(<strong>Template Swap Rate</strong>)</a></h2>
+<p>Template Swap Rate使得用户可以使用一个模型来定义标准互换(tandard swap)、基差互换(basis swap) 或其他类型的互换利率。该模型中参数包含:</p>
+<p>——Curve Family : 必需的，由用户定义。指定用于对利率贴现的曲线系。</p>
+<p>——Model：利率模型必须设置为Template Swap Rate。</p>
+<p>——Swap Template：定义用作一般互换利率模板的互换利率。basis, frequency, compounding mode, spread, settlement lag, index, fixing place, calendar place和hort index等一系列参数通过模板获取。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../InterestRate/Advanced可选设置项.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../InterestRate/凸性调整.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../InterestRate/Advanced可选设置项.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../InterestRate/凸性调整.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+            <!--<div class="esa-toolbar">
+                <button class="esa-toolbar-gotop" data-tips="回到顶部" style="display: block;">
+                    <i class="fa fa-angle-up fa-3x" aria-hidden="true"></i>
+                </button>
+            </div>-->
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../sidebar.js"></script>
+    </body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>GetCurveFamilyUIParams - FusionChina计算引擎拆解</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+		
+		<!-- Katex support -->
+		<link rel="stylesheet" href="../static/katex/katex.min.css">
+		
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../global.css">
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../InterestRate/InterestRate定义简介.html"><strong aria-hidden="true">1.</strong> Insterest Rate Definition</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../InterestRate/InterestRate定义简介.html"><strong aria-hidden="true">1.1.</strong> InterestRate定义简介</a></li><li class="chapter-item "><a href="../InterestRate/InterestRate定义具体设置.html"><strong aria-hidden="true">1.2.</strong> InterestRate定义具体设置</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../InterestRate/RateDefinition可选设置项.html"><strong aria-hidden="true">1.2.1.</strong> Rate Definition可选设置项</a></li><li class="chapter-item "><a href="../InterestRate/Advanced可选设置项.html"><strong aria-hidden="true">1.2.2.</strong> Advanced可选设置项</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../InterestRate/利率模型选择.html"><strong aria-hidden="true">1.2.2.1.</strong> 利率模型选择</a></li><li class="chapter-item "><a href="../InterestRate/凸性调整.html"><strong aria-hidden="true">1.2.2.2.</strong> 凸性调整</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../YieldCurve/CurvesFamily模型说明.html"><strong aria-hidden="true">2.</strong> Yield Curve</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../YieldCurve/CurvesFamily模型说明.html"><strong aria-hidden="true">2.1.</strong> Curves Family</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../YieldCurve/CurvesFamily模型说明.html"><strong aria-hidden="true">2.1.1.</strong> 模型说明</a></li><li class="chapter-item "><a href="../YieldCurve/CurvesFamily函数调用关系.html"><strong aria-hidden="true">2.1.2.</strong> 函数调用关系</a></li><li class="chapter-item expanded "><a href="../YieldCurve/GetCurveFamilyUIParams.html" class="active"><strong aria-hidden="true">2.1.3.</strong> 函数说明</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../YieldCurve/GetCurveFamilyUIParams.html" class="active"><strong aria-hidden="true">2.1.3.1.</strong> GetCurveFamilyUIParams</a></li></ol></li></ol></li><li class="chapter-item "><a href="../YieldCurve/YieldCurvesSummary.html"><strong aria-hidden="true">2.2.</strong> Yield Curves Summary</a></li><li class="chapter-item "><a href="../YieldCurve/YieldCurves模型说明.html"><strong aria-hidden="true">2.3.</strong> Yield Curves</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../YieldCurve/YieldCurves模型说明.html"><strong aria-hidden="true">2.3.1.</strong> 模型说明</a></li><li class="chapter-item "><a href="../YieldCurve/YieldCurves函数调用关系.html"><strong aria-hidden="true">2.3.2.</strong> 函数调用关系</a></li><li class="chapter-item "><a href="../YieldCurve/GetYieldCurve.html"><strong aria-hidden="true">2.3.3.</strong> 函数说明</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../YieldCurve/GetYieldCurve.html"><strong aria-hidden="true">2.3.3.1.</strong> GetYieldCurve</a></li><li class="chapter-item "><a href="../YieldCurve/ShortTemplate.html"><strong aria-hidden="true">2.3.3.2.</strong> ShortTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/LongTemplate.html"><strong aria-hidden="true">2.3.3.3.</strong> LongTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/FutureTemplate.html"><strong aria-hidden="true">2.3.3.4.</strong> FutureTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/SelectShortLongTemplate.html"><strong aria-hidden="true">2.3.3.5.</strong> SelectShortLongTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/SelectShortFutureLongTemplate.html"><strong aria-hidden="true">2.3.3.6.</strong> SelectShortFutureLongTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/YieldCurveTermRate.html"><strong aria-hidden="true">2.3.3.7.</strong> YieldCurveTermRate</a></li><li class="chapter-item "><a href="../YieldCurve/ForwardRateTemplate.html"><strong aria-hidden="true">2.3.3.8.</strong> ForwardRateTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/MaturityForwardRateTemplate.html"><strong aria-hidden="true">2.3.3.9.</strong> MaturityForwardRateTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/RateForwardRateTemplate.html"><strong aria-hidden="true">2.3.3.10.</strong> RateForwardRateTemplate</a></li><li class="chapter-item "><a href="../YieldCurve/ForwardTermRate.html"><strong aria-hidden="true">2.3.3.11.</strong> ForwardTermRate</a></li><li class="chapter-item "><a href="../YieldCurve/InterpolationMethod.html"><strong aria-hidden="true">2.3.3.12.</strong> InterpolationMethod</a></li><li class="chapter-item "><a href="../YieldCurve/SmoothYieldCurve.html"><strong aria-hidden="true">2.3.3.13.</strong> SmoothYieldCurve</a></li><li class="chapter-item "><a href="../YieldCurve/InterpolationYieldCurveRate.html"><strong aria-hidden="true">2.3.3.14.</strong> InterpolationYieldCurveRate</a></li><li class="chapter-item "><a href="../YieldCurve/InterpolationMethod.html"><strong aria-hidden="true">2.3.3.15.</strong> InterpolationMethod</a></li></ol></li></ol></li><li class="chapter-item "><a href="../YieldCurve/Standard.html"><strong aria-hidden="true">2.4.</strong> Yield Curve Model</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div><strong aria-hidden="true">2.4.1.</strong> Standard （暂无）</div></li><li class="chapter-item "><a href="../YieldCurve/BondSpreadcurve.html"><strong aria-hidden="true">2.4.2.</strong> Bond Spread curve</a></li><li class="chapter-item "><a href="../YieldCurve/NelsonSiegelNelsonSiegelSvensson.html"><strong aria-hidden="true">2.4.3.</strong> Nelson Siegel/Nelson Siegel Svensson</a></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.4.</strong> CMS Spread Curve（暂无）</div></li><li class="chapter-item "><a href="../YieldCurve/CubicSplineGlobalCubicSpline.html"><strong aria-hidden="true">2.4.5.</strong> Cubic Spline/Global Cubic Spline</a></li><li class="chapter-item "><a href="../YieldCurve/FlatForward.html"><strong aria-hidden="true">2.4.6.</strong> Flat Forward</a></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.7.</strong> Forex（暂无）</div></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.8.</strong> Forex Curve（暂无）</div></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.9.</strong> Forex Point Curve（暂无）</div></li><li class="chapter-item "><div><strong aria-hidden="true">2.4.10.</strong> OIS discount（暂无）</div></li><li class="chapter-item "><a href="../YieldCurve/rt_linear.html"><strong aria-hidden="true">2.4.11.</strong> rt_linear</a></li><li class="chapter-item "><a href="../YieldCurve/SmithWilson.html"><strong aria-hidden="true">2.4.12.</strong> Smith Wilson</a></li></ol></li></ol></li><li class="chapter-item "><a href="../SABR/模型说明.html"><strong aria-hidden="true">3.</strong> SABR模型</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../SABR/模型说明.html"><strong aria-hidden="true">3.1.</strong> 模型说明</a></li><li class="chapter-item "><a href="../SABR/函数调用关系.html"><strong aria-hidden="true">3.2.</strong> 函数调用关系</a></li><li class="chapter-item "><a href="../SABR/GetUISABRModel.html"><strong aria-hidden="true">3.3.</strong> 函数说明</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../SABR/GetUISABRModel.html"><strong aria-hidden="true">3.3.1.</strong> GetUISABRModel</a></li><li class="chapter-item "><a href="../SABR/CalParamEndResult.html"><strong aria-hidden="true">3.3.2.</strong> CalParamEndResult</a></li><li class="chapter-item "><a href="../SABR/CalBestParamResult.html"><strong aria-hidden="true">3.3.3.</strong> CalBestParamResult</a></li><li class="chapter-item "><a href="../SABR/FromUserInputResult.html"><strong aria-hidden="true">3.3.4.</strong> FromUserInputResult</a></li><li class="chapter-item "><a href="../SABR/FromVolatilitySmile.html"><strong aria-hidden="true">3.3.5.</strong> FromVolatilitySmile</a></li><li class="chapter-item "><a href="../SABR/CalibrateonlyAlpha.html"><strong aria-hidden="true">3.3.6.</strong> CalibrateonlyAlpha</a></li><li class="chapter-item "><a href="../SABR/HaganModel.html"><strong aria-hidden="true">3.3.7.</strong> HaganModel</a></li><li class="chapter-item "><a href="../SABR/BetterExpansion.html"><strong aria-hidden="true">3.3.8.</strong> Better expansion</a></li><li class="chapter-item "><a href="../SABR/PDEModel.html"><strong aria-hidden="true">3.3.9.</strong> PDEModel</a></li><li class="chapter-item "><a href="../SABR/MixOrder2PDEModel.html"><strong aria-hidden="true">3.3.10.</strong> MixOrder2PDEModel</a></li><li class="chapter-item "><a href="../SABR/CalRelativeTime.html"><strong aria-hidden="true">3.3.11.</strong> CalRelativeTime</a></li><li class="chapter-item "><a href="../SABR/BFGSSolver.html"><strong aria-hidden="true">3.3.12.</strong> BFGSSolver</a></li><li class="chapter-item "><a href="../SABR/TargetModel.html"><strong aria-hidden="true">3.3.13.</strong> TargetModel</a></li><li class="chapter-item "><a href="../SABR/CalVolatilityProcess.html"><strong aria-hidden="true">3.3.14.</strong> CalVolatilityProcess</a></li><li class="chapter-item "><a href="../SABR/PricingSABRAfterParamInterpolation.html"><strong aria-hidden="true">3.3.15.</strong> PricingSABRAfterParamInterpolation</a></li><li class="chapter-item "><a href="../SABR/SABRParameterInterplation.html"><strong aria-hidden="true">3.3.16.</strong> SABRParameterInterplation</a></li><li class="chapter-item "><a href="../SABR/SABRVegaModel.html"><strong aria-hidden="true">3.3.17.</strong> SABRVegaModel</a></li></ol></li></ol></li><li class="chapter-item "><a href="../解析算法/模型说明.html"><strong aria-hidden="true">4.</strong> 解析算法</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../解析算法/PCA/PCA模型.html"><strong aria-hidden="true">4.1.</strong> PCA</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">FusionChina计算引擎拆解</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+					<main>
+                        <!-- Page table of contents -->
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+
+                        <h1 id="函数说明"><a class="header" href="#函数说明">函数说明</a></h1>
+<h2 id="getcurvefamilyuiparams"><a class="header" href="#getcurvefamilyuiparams">GetCurveFamilyUIParams</a></h2>
+<h4 id="函数功能说明"><a class="header" href="#函数功能说明">函数功能说明</a></h4>
+<p>​		构建曲线族从UI端获得的参数界面</p>
+<h4 id="前端交互说明"><a class="header" href="#前端交互说明">前端交互说明</a></h4>
+<p>新建曲线族界面：<a id='新建曲线族'></a></p>
+<p><img src="curve_family_dialog_new.jpg" alt="" /></p>
+<p>Name：曲线族的名称，必选。该名称在以下界面中使用：</p>
+<ul>
+<li>当特定曲线的族被分配给金融工具时，在金融工具窗口上使用。</li>
+<li>在“利率”窗口的“曲线族”字段上，将特定曲线族与利率关联起来。</li>
+<li>在“市场数据规则”窗口中，将曲线族与工具类型关联。</li>
+</ul>
+<p>Currency：定义曲线族的货币，必选。</p>
+<p><strong>以下收益率曲线族的具体属性、用法、业务提炼的优点有待于在后续研究中完善</strong></p>
+<p>Model：定义曲线族模型，必选。可用选项如下：</p>
+<ul>
+<li><strong>Standard</strong>（目前唯一选择）</li>
+</ul>
+<p>Vega Curve Type：定义vega曲线类型，必选。可以用来模拟波动率变动时价格的变化。可用选项如下：</p>
+<ul>
+<li><strong>Call Result</strong></li>
+<li><strong>Call Market</strong></li>
+<li><strong>Call Management</strong></li>
+<li><strong>Call Bid</strong></li>
+<li><strong>Call Ask</strong></li>
+<li><strong>Put Result</strong></li>
+<li><strong>Put Market</strong></li>
+<li><strong>Put Management</strong></li>
+<li><strong>Put Bid</strong></li>
+<li><strong>Put Ask</strong></li>
+</ul>
+<p>Spread Analysis Rate：定义用于价差分析的利率，必选。可用的选项是，Interest Rate中针对该货币定义的利率。</p>
+<p>HW Mean Reversion(%)：定义用于Hull-White模型的mean-reversion rate 。</p>
+<p>Intersest Rate：定义曲线族的基础利率。对于发布时间为T+1的利率(如SOFR)，此设置是必要的，以便于处理由于发布延迟而导致的fixing缺失情况。可用选项仅货币市场利率。</p>
+<p>Breakdowns：收益率曲线系列分解窗口用于定义不同期限的收益率曲线系列。如果你为一种货币定义这些数据点，这些点将用于IR分类列表的参数VaR分析。在选定的细分市场中，金融工具会根据同一种货币的收益率曲线折现。如果没有为收益率曲线族定义风险因子列表，则使用违约利率细分，并将收益率曲线族风险映射到违约收益率曲线风险因素列表。<strong>（待完善）</strong></p>
+<p><img src="E:/FFFFFFFFFFusion/D1205.model/mdBook/qtbooks/src/static/typora-user-images/yield_curve_family_breakdowns.png" alt="" /></p>
+<p>Auxiliary Information：点击打开<strong>Auxiliary Data</strong>框，定义曲线族的波动率。波动性是通过为波动类型指定一个利率来定义的。为该利率定义的波动率被用作该曲线族中所有曲线的相关波动率。</p>
+<p><img src="E:/FFFFFFFFFFusion/D1205.model/mdBook/qtbooks/src/static/typora-user-images/auxiliarydata.png" alt="" /></p>
+<ul>
+<li>
+<p>Volatility Category：曲线族波动率，可选类型为：</p>
+<ul>
+<li><strong>CDS Option Volatility</strong></li>
+<li><strong>Cap/Floor Volatility</strong></li>
+<li><strong>Caplet/Floorlet Volatility</strong></li>
+<li><strong>Swaption Volatility</strong></li>
+</ul>
+</li>
+<li>
+<p>Instrument：定义波动率所依赖的利率，可选。</p>
+</li>
+</ul>
+<p>Repo Curve Points List</p>
+<ul>
+<li>Maturity：回购曲线的到期日期，必选。</li>
+<li>L/B Cost：对应到期期限的回购利率的借贷成本，必选。</li>
+<li>Bid：回购的bid价，必选。</li>
+<li>Ask：回购的ask价，必选。</li>
+</ul>
+<h4 id="参数表"><a class="header" href="#参数表">参数表</a></h4>
+<blockquote>
+<p>入参表：</p>
+</blockquote>
+<table><thead><tr><th>序号</th><th>入参</th><th>入参说明</th><th>类型</th><th>是否必须</th><th>数据来源</th></tr></thead><tbody>
+<tr><td>1</td><td>name</td><td>曲线族的名称</td><td>str</td><td>是</td><td>Input</td></tr>
+<tr><td>2</td><td>model</td><td>曲线族模型，option=['Standard']</td><td>str</td><td>是</td><td>Input</td></tr>
+<tr><td>3</td><td>currency_str</td><td>曲线族使用的货币</td><td>str</td><td>是</td><td>Input</td></tr>
+<tr><td>4</td><td>vega_curve_type</td><td>vega-curve类型。它的曲线类型可以用来模拟波动率修改时的价格变化。Option=['Call Result', 'Call  Market', 'Call Management', 'Call Bid', 'Call Ask', 'Put Result', 'Put  Market', 'Put Management', 'Put Bid', 'Put Ask']</td><td>str</td><td>否</td><td>Mehtod</td></tr>
+<tr><td>5</td><td>breakdowns</td><td>收益率曲线族细分窗口用于定义不同到期日的收益率曲线族</td><td>matrix</td><td>否</td><td>Input</td></tr>
+<tr><td>6</td><td>auxiliary_infomation</td><td>辅助数据窗口定义曲线族窗口中每条收益率曲线的波动率。</td><td>matrix</td><td>否</td><td>Input</td></tr>
+<tr><td>7</td><td>spread_analysis_rate</td><td>用于利差分析的利率。Option=[参数currency定义的汇率]</td><td>str</td><td>否</td><td>MarketData</td></tr>
+<tr><td>8</td><td>hw_mean_reversion</td><td>定义Hull-White的均值回归率。均值回归用于校准Hull-White模型。</td><td>float</td><td>否</td><td>Input</td></tr>
+<tr><td>9</td><td>repo_curve_points_list</td><td>回购曲线点列表，包括：Maturity(回购曲线的到期日)、L/B  Cost(与到期日相关的回购利率的借贷成本)、Bid(回购的出价)、Ask(回购的要价)</td><td>matrix</td><td>否</td><td>MarketData</td></tr>
+</tbody></table>
+<blockquote>
+<p>出参表：</p>
+</blockquote>
+<p>无</p>
+<h4 id="函数隶属类型"><a class="header" href="#函数隶属类型">函数隶属类型</a></h4>
+<p>​		该函数隶属Methods，用于定义同族曲线的共同特征。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../YieldCurve/CurvesFamily函数调用关系.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../YieldCurve/GetCurveFamilyUIParams.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../YieldCurve/CurvesFamily函数调用关系.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../YieldCurve/GetCurveFamilyUIParams.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+            <!--<div class="esa-toolbar">
+                <button class="esa-toolbar-gotop" data-tips="回到顶部" style="display: block;">
+                    <i class="fa fa-angle-up fa-3x" aria-hidden="true"></i>
+                </button>
+            </div>-->
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../sidebar.js"></script>
+    </body>
+</html>
